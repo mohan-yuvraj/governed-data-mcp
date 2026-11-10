@@ -1,0 +1,55 @@
+{
+  "total": 8,
+  "passed": 8,
+  "score_pct": 100.0,
+  "results": [
+    {
+      "id": "q1",
+      "question": "How many claims were filed in the US between 2026-10-26 and 2026-11-08?",
+      "passed": true,
+      "detail": "got 6074, expected 6074 (tol 0)"
+    },
+    {
+      "id": "q2",
+      "question": "How many claims were resolved in total between 2026-10-26 and 2026-11-08?",
+      "passed": true,
+      "detail": "got 8679, expected 8679 (tol 0)"
+    },
+    {
+      "id": "q3",
+      "question": "What was the resolution rate in the UK between 2026-10-26 and 2026-11-08?",
+      "passed": true,
+      "detail": "got 95.39, expected 95.39 (tol 0.05)"
+    },
+    {
+      "id": "q4",
+      "question": "What was the average resolution time in days for Canada between 2026-10-26 and 2026-11-08?",
+      "passed": true,
+      "detail": "got 4.72, expected 4.72 (tol 0.05)"
+    },
+    {
+      "id": "q5",
+      "question": "What does resolution_rate mean?",
+      "passed": true,
+      "detail": "all keywords present"
+    },
+    {
+      "id": "q6",
+      "question": "Where does claims_filed come from?",
+      "passed": true,
+      "detail": "all keywords present"
+    },
+    {
+      "id": "q7",
+      "question": "Do the data-quality checks pass?",
+      "passed": true,
+      "detail": "got True, expected True"
+    },
+    {
+      "id": "q8",
+      "question": "How many claims were filed in the UK on 2026-11-06 only?",
+      "passed": true,
+      "detail": "got 136, expected 136 (tol 0)"
+    }
+  ]
+}
