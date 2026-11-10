@@ -1,0 +1,43 @@
+# Governed metric registry — the single source of truth for definitions.
+# A metric only exists if it is listed here, with an owner and an SLA.
+# Synthetic data; no real company data, no PII columns exist in this dataset.
+dataset: claims_daily
+owner: data-platform
+sla:
+  freshness_hours: 24
+  max_null_pct: 0
+  dq_check: daily
+
+metrics:
+  claims_filed:
+    definition: "Count of claims filed on a date, per market."
+    unit: claims
+    owner: claims-platform
+    sla_hours: 24
+    lineage: "claims intake -> claims_daily.claims_filed"
+  claims_resolved:
+    definition: "Count of claims resolved on a date, per market."
+    unit: claims
+    owner: claims-platform
+    sla_hours: 24
+    lineage: "claims ops -> claims_daily.claims_resolved"
+  resolution_rate:
+    definition: "claims_resolved / claims_filed, as a percentage, for the selected grain and date range."
+    unit: percent
+    owner: claims-platform
+    sla_hours: 24
+    lineage: "claims_daily.claims_resolved / claims_daily.claims_filed"
+  avg_resolution_days:
+    definition: "Mean days from filing to resolution, weighted by claims filed, for the selected grain and date range."
+    unit: days
+    owner: claims-platform
+    sla_hours: 24
+    lineage: "claims_daily.avg_resolution_days weighted by claims_filed"
+
+# Columns that must never be exposed, even if added to the dataset later.
+denied_columns:
+  - claimant_name
+  - claimant_email
+  - claimant_phone
+  - ssn
+  - bank_account
