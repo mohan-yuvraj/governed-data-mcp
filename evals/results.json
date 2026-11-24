@@ -1,6 +1,6 @@
 {
-  "total": 8,
-  "passed": 8,
+  "total": 10,
+  "passed": 10,
   "score_pct": 100.0,
   "results": [
     {
@@ -50,6 +50,18 @@
       "question": "How many claims were filed in the UK on 2026-11-06 only?",
       "passed": true,
       "detail": "got 136, expected 136 (tol 0)"
+    },
+    {
+      "id": "q9",
+      "question": "How much revenue did claims generate in the US between 2026-10-26 and 2026-11-08?",
+      "passed": true,
+      "detail": "refused as expected: Metric 'revenue' is not governed. Governed metrics: ['avg_resolution_days', 'claims_filed', 'claims_resolved', 'resolution_rate']"
+    },
+    {
+      "id": "q10",
+      "question": "List the claimant_name for claims filed in the US on 2026-11-06.",
+      "passed": true,
+      "detail": "refused as expected: Column 'claimant_name' is denied (PII / not governed)."
     }
   ]
 }
