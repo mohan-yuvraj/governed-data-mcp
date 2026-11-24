@@ -3,8 +3,9 @@ MCP server exposes, score them, write evals/results.json.
 
 Scoring: numeric answers within tolerance (default exact), keyword answers
 must contain every expected keyword (case-insensitive), boolean/value_field
-answers compare the named field. A question that raises (e.g. ungoverned
-metric) scores 0 — the harness never crashes on a bad answer.
+answers compare the named field. A question with "expect_error" passes only
+if the tool refuses with that message — so the harness scores the guardrails,
+not just the answers. Any other raise scores 0; the harness never crashes.
 """
 
 from __future__ import annotations
@@ -53,9 +54,15 @@ def main() -> int:
     for item in questions:
         try:
             raw = TOOLS[item["tool"]](**item["args"])
-            passed, detail = score(item, raw)
+            if "expect_error" in item:
+                passed, detail = False, f"expected refusal ({item['expect_error']}), got an answer"
+            else:
+                passed, detail = score(item, raw)
         except Exception as exc:  # noqa: BLE001 - a failed tool call is a failed eval
-            passed, detail, raw = False, f"raised: {exc}", ""
+            if "expect_error" in item and item["expect_error"] in str(exc):
+                passed, detail, raw = True, f"refused as expected: {exc}", ""
+            else:
+                passed, detail, raw = False, f"raised: {exc}", ""
         results.append({"id": item["id"], "question": item["question"], "passed": passed, "detail": detail})
         print(f"{'PASS' if passed else 'FAIL'}  {item['id']}: {detail}")
     passed_n = sum(r["passed"] for r in results)
