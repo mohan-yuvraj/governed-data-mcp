@@ -37,14 +37,15 @@ pytest -q
 
 ## Eval harness
 
-`evals/golden_questions.json` holds 8 questions with expected answers computed
+`evals/golden_questions.json` holds 10 questions with expected answers computed
 from the governed definitions. `evals/run_evals.py` answers each one by calling
 the same tool functions the MCP server exposes, scores exact-match on numbers
 and keyword-match on explanations, and writes `evals/results.json`.
 
 Run it and check the score before claiming the artefact works — the harness is
-the point, not the server alone. Verified Nov 9, 2026: **8/8 golden questions
-pass (100%)** — see `evals/results.json`.
+the point, not the server alone. Verified Nov 23, 2026: **10/10 golden questions
+pass (100%)**, including two refusal evals (ungoverned metric, denied PII column)
+— see `evals/results.json`.
 
 ## Repo map
 
